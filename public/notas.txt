@@ -1,0 +1,4 @@
+Sub Grupo Materiales => gruposubmats
+Materiales => materias
+Relación de Sub Grupo Materiales con Materiales => subgrupomat_material
+Grupo de Materiales => grupomats

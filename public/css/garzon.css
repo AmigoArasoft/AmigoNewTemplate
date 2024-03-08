@@ -1,0 +1,42 @@
+.bg-gradiente {
+    background: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0));
+}
+.bg-gradiente50 {
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6));
+}
+.parallax {
+	background-attachment: fixed;
+  	background-position: center top;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+}
+.pardo{
+	color: #5b3a29;
+}
+.bg-pardoClaro{
+	background-color: #c1b9b4;
+}
+.pardoClaro{
+	color: #c1b9b4;
+}
+footer{
+	font-size: .75rem;
+}
+footer a, footer a:hover{
+	color: #fff;
+}
+#galeriaImagen img {
+	transition:all .5s ease-in-out;
+}
+#galeriaImagen img:hover {
+	-webkit-transform:scale(1.15);
+	transform:scale(1.15);
+}
+#galeriaImagen img {
+	overflow: hidden;
+}
+
+.dropdown-toggle{
+	border: 1px solid #ced4da !important;
+	background: white !important;
+}
