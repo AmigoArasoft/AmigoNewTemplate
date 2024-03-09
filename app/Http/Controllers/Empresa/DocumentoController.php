@@ -57,6 +57,19 @@ class DocumentoController extends Controller{
         return redirect()->route('documento')->with('info', 'Registro actualizado con éxito');
     }
 
+    public function descargar(Request $request, $archivo){
+        // Validar el archivo
+        if (!Storage::exists('public/documento/' . $archivo)) {
+            return back()->with('error', 'Documento no encontrado');
+        }
+
+        // Obtener el nombre del archivo original
+        $nombreOriginal = basename($archivo);
+
+        // Devolver el archivo como descarga
+        return response()->download(storage_path('app/public/documento/' . $archivo), $nombreOriginal);
+    }
+
     public function destroy($id){
         $dato = Documento::findOrFail($id);
         $dato->activo = ($dato->activo == 1) ? 0 : 1;

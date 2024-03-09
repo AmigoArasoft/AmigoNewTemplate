@@ -4454,7 +4454,7 @@ typography
 }
 .card .card-header,
 .card .card-footer {
-  background-color: var(--custom-white) !important;
+  background-color: var(--menu-bg) !important;
   color: var(--default-text-color);
 }
 

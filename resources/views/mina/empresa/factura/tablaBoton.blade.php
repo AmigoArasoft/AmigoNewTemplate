@@ -1,4 +1,4 @@
-<div class="btn-list">
+<div class="hstack gap-2 fs-15">
 	@can('Factura editar')
 		<a class="btn btn-sm btn-warning" href="{{ route('factura.editar', $id) }}"><i class="fas fa-edit"></i> Editar</a>
 	@endcan

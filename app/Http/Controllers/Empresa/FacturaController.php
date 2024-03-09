@@ -22,7 +22,21 @@ class FacturaController extends Controller{
     }
 
     public function index(Request $request){
-        return view('mina.empresa.factura.index');
+        $volumen = 0;
+        $cantidad_viajes = 0;
+        $facturas = Factura::get();
+        $viajes_sin_facturar =  number_format(Viaje::where(['activo' => 1, 'factura_id' => NULL])->count(), 0, '', '.');
+
+        foreach($facturas as $factura){
+            $viajes = $factura->viajes;
+            $volumen += $viajes->sum('volumen');
+            $cantidad_viajes += $viajes->count();
+        }
+
+        $total_facturado = number_format($facturas->sum('valor'), 0, '', '.');
+        $volumen = number_format($volumen, 0, '', '.');
+        $cantidad_viajes = number_format($cantidad_viajes, 0, '', '.');
+        return view('mina.empresa.factura.index', compact('total_facturado', 'volumen', 'cantidad_viajes', 'viajes_sin_facturar'));
     }
 
     public function list(Request $request){

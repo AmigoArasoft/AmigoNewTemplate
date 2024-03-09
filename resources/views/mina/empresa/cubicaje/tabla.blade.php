@@ -2,7 +2,7 @@
 	<div class="card-header">@yield('titulo')
 		@if(Auth::user()->tercero_id == 1)
 			@can('Cubicaje crear')
-			    <a class="btn btn-sm btn-default text-dark" href="{{ route('cubicaje.crear') }}">
+			    <a class="btn btn-sm btn-light text-dark" href="{{ route('cubicaje.crear') }}">
 					<i class="fas fa-plus-circle"></i> Nuevo
 				</a>
 			@endcan

@@ -134,6 +134,7 @@ Route::prefix('amigo')->group(function () {
 				Route::middleware(['permission:Documento leer|Documento crear|Documento editar|Documento borrar'])->group(function () {
 					Route::get('', [DocumentoController::class, 'index'])->name('documento');
 					Route::get('listar', [DocumentoController::class, 'list'])->name('documento.listar');
+					Route::get('storage/download/{archivo}', [DocumentoController::class, 'descargar'])->name('storage.download');
 				});
 				Route::middleware(['permission:Documento crear'])->group(function () {
 					Route::get('crear', [DocumentoController::class, 'create'])->name('documento.crear');

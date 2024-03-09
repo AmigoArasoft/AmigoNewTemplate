@@ -34,7 +34,8 @@
         <script src="{{asset('build/assets/main.js')}}"></script>
 
         @yield('styles')
-
+        
+        <link href="{{ asset('css/garzon.css') }}" rel="stylesheet">
 	</head>
 
 	<body>

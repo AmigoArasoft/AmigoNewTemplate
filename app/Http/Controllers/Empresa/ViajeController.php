@@ -30,7 +30,12 @@ class ViajeController extends Controller{
     }
 
     public function index(Request $request){
-        return view('mina.empresa.viaje.index');
+        $viajes_activos = number_format(Viaje::where('activo', 1)->count(), 0, '', '.');
+        $viajes_certificados = number_format(Viaje::where(['activo' => 1, 'certificado' => 1])->count(), 0, '', '.');
+        $viajes_sin_certificados = number_format(Viaje::where(['activo' => 1, 'certificado' => 0])->count(), 0, '', '.');
+        $volumen = number_format(Viaje::where(['activo' => 1])->sum('volumen'), 0, '', '.');
+
+        return view('mina.empresa.viaje.index', compact('viajes_activos', 'viajes_certificados', 'volumen', 'viajes_sin_certificados'));
     }
 
     public function list(Request $request){

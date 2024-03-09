@@ -53,7 +53,6 @@ function getOperadores(){
         data: {},
         success: function (response) {
             if(response.data){
-                $("#modalCertificateTrips").modal("show");
 
                 $.each(response.data, function (i, v) { 
                     $("#operador_id").append(`

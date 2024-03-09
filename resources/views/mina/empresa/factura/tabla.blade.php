@@ -19,7 +19,7 @@
 										<div class="d-flex align-items-center justify-content-between flex-wrap">
 											<div>
 												<p class="text-muted mb-0">Facturado</p>
-												<h4 class="fw-semibold mt-1">$ 1.129.334.122</h4>
+												<h4 class="fw-semibold mt-1">$ {{ $total_facturado }}</h4>
 											</div>
 											<div id="crm-conversion-ratio"></div>
 										</div>
@@ -40,8 +40,8 @@
 									<div class="flex-fill ms-3">
 										<div class="d-flex align-items-center justify-content-between flex-wrap">
 											<div>
-												<p class="text-muted mb-0">Metros cuadrados</p>
-												<h4 class="fw-semibold mt-1">103.544 m2</h4>
+												<p class="text-muted mb-0">M3 Facturados</p>
+												<h4 class="fw-semibold mt-1">{{ $volumen }} m3</h4>
 											</div>
 											<div id="crm-total-revenue"></div>
 										</div>
@@ -63,7 +63,7 @@
 										<div class="d-flex align-items-center justify-content-between flex-wrap">
 											<div>
 												<p class="text-muted mb-0">Viajes facturados</p>
-												<h4 class="fw-semibold mt-1">16.890</h4>
+												<h4 class="fw-semibold mt-1">{{ $cantidad_viajes }}</h4>
 											</div>
 											<div id="crm-total-customers"></div>
 										</div>
@@ -85,7 +85,7 @@
 										<div class="d-flex align-items-center justify-content-between flex-wrap">
 											<div>
 												<p class="text-muted mb-0">Viajes sin facturar</p>
-												<h4 class="fw-semibold mt-1">2,543</h4>
+												<h4 class="fw-semibold mt-1">{{ $viajes_sin_facturar }}</h4>
 											</div>
 											<div id="crm-total-deals"></div>
 										</div>
@@ -103,7 +103,7 @@
 	<div class="card-header">@yield('titulo')
 		@if(Auth::user()->tercero_id == 1)
 			@can('Factura crear')
-				<a class="btn btn-sm btn-default text-dark" href="{{ route('factura.crear') }}">
+				<a class="btn btn-sm btn-light text-dark" href="{{ route('factura.crear') }}">
 					<i class="fas fa-plus-circle"></i> Nuevo
 				</a>
 			@endcan

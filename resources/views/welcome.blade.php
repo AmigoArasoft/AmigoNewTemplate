@@ -2,7 +2,7 @@
 
 @section('titulo', 'Garzón Romero')
 
-@section('content')
+@section('contenido')
 <div data-spy="scroll" data-target="#menuWeb" data-offset="0">
     <div id="inicio">
         @include('plantilla.webCarrusel')

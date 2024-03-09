@@ -1,7 +1,7 @@
 <div class="card card-info">
 	<div class="card-header">@yield('titulo') 
 		@can('Vehiculo crear')
-		    <a class="btn btn-sm btn-default text-dark" href="{{ route('vehiculo.crear') }}">
+		    <a class="btn btn-sm btn-light text-dark" href="{{ route('vehiculo.crear') }}">
 				<i class="fas fa-plus-circle"></i> Nuevo
 			</a>
 		@endcan

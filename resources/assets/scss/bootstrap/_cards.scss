@@ -1,6 +1,10 @@
 .card {
   margin-block-end: 1.5rem;
-  .card-header,
+  .card-header {
+    background-color: $menu-bg !important;
+    color: $custom-white;
+  }
+
   .card-footer {
     background-color: $custom-white !important;
     color: $default-text-color;
