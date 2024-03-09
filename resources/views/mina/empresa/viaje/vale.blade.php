@@ -126,7 +126,7 @@
                     <h4>CONDUCTOR</h4>
                 </td>
                 <td colspan="7" class="borde">
-                    {{ $dato->conductor->nombre }}
+                    {{ $dato->conductor_nombre }}
                 </td>
             </tr>
             <tr class="centro">
