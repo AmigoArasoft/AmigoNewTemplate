@@ -1,54 +1,32 @@
 
-            <aside class="app-sidebar sticky" id="sidebar">
+<aside class="app-sidebar sticky" id="sidebar">
 
-                <!-- Start::main-sidebar-header -->
-                <div class="main-sidebar-header">
-                    <a href="{{url('index')}}" class="header-logo">
-                        <img src="{{asset('img/logo_letras_blancas.png')}}" alt="logo" class="desktop-dark">
-                    </a>
-                </div>
-                <!-- End::main-sidebar-header -->
+    <!-- Start::main-sidebar-header -->
+    <div class="main-sidebar-header">
+        <a href="{{url('/amigo')}}" class="header-logo">
+            <img src="{{asset('img/logo_letras_blancas.png')}}" alt="logo" class="desktop-dark">
+        </a>
+    </div>
+    <!-- End::main-sidebar-header -->
 
-                <!-- Start::main-sidebar -->
-                <div class="main-sidebar" id="sidebar-scroll">
-                    <nav class="main-menu-container nav nav-pills flex-column sub-open">
-                        <div class="slide-left" id="slide-left">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
-                        </div>
-                        <ul class="main-menu">
-                            @if(Auth::user()->tercero_id == 1)
-                                <li class="slide has-sub">
-                                    <a href="javascript:void(0);" class="side-menu__item">
-                                        <i class="bx bx-user side-menu__icon"></i>
-                                        <span class="side-menu__label">Acceso</span>
-                                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                                    </a>
-                                    @include('plantilla.mina.menu.acceso')
-                                </li>
-                                <li class="slide has-sub">
-                                    <a href="javascript:void(0);" class="side-menu__item">
-                                        <i class="bx bx-cog side-menu__icon"></i>
-                                        <span class="side-menu__label">Administración</span>
-                                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                                    </a>
-                                    @include('plantilla.mina.menu.administracion')
-                                </li>
-                                <li class="slide has-sub">
-                                    <a href="javascript:void(0);" class="side-menu__item">
-                                        <i class="bx bx-store side-menu__icon"></i>
-                                        <span class="side-menu__label">Empresa</span>
-                                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                                    </a>
-                                    @include('plantilla.mina.menu.empresa')
-                                </li>
-                            @endif
-                            @include('plantilla.mina.menu.viaje')
-                        </ul>
-                        <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path> </svg></div>
-                    </nav>
-                    <!-- End::nav -->
+    <!-- Start::main-sidebar -->
+    <div class="main-sidebar" id="sidebar-scroll">
 
-                </div>
-                <!-- End::main-sidebar -->
+        <!-- Start::nav -->
+        <nav class="main-menu-container nav nav-pills flex-column sub-open">
+            <div class="slide-left" id="slide-left">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
+            </div>
+            <ul class="main-menu">
+                @include('plantilla.mina.menu.acceso')
+                @include('plantilla.mina.menu.administracion')
+                @include('plantilla.mina.menu.empresa')
+                @include('plantilla.mina.menu.viaje')
+            </ul>
+        </nav>
+        <!-- End::nav -->
 
-            </aside>
+    </div>
+    <!-- End::main-sidebar -->
+
+</aside>
