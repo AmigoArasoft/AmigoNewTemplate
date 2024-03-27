@@ -234,11 +234,6 @@
     "isEntry": true,
     "src": "resources/assets/js/draggable-cards.js"
   },
-  "resources/assets/js/echarts.js": {
-    "file": "assets/echarts-c666f2b0.js",
-    "isEntry": true,
-    "src": "resources/assets/js/echarts.js"
-  },
   "resources/assets/js/ecommerce-dashboard.js": {
     "file": "assets/ecommerce-dashboard-c398248f.js",
     "isEntry": true,
@@ -540,7 +535,7 @@
     "src": "resources/js/app.js"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-908e1702.css",
+    "file": "assets/app-d91f6089.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
   }

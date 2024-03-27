@@ -62,7 +62,6 @@ export default defineConfig({
                 'resources/assets/js/date&time_pickers.js',
                 'resources/assets/js/defaultmenu.js',
                 'resources/assets/js/draggable-cards.js',
-                'resources/assets/js/echarts.js',
                 'resources/assets/js/ecommerce-dashboard.js',
                 'resources/assets/js/edit-products.js',
                 'resources/assets/js/error.js',
