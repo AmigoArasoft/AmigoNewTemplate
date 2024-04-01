@@ -169,7 +169,7 @@
             <tr class="centro">
                 <td colspan="2" class="borde color0">FIRMA DEL EXPLOTADOR MINERO AUTORIZADO</td>
                 <td colspan="6" class="borde">
-                    <img src="{{ (is_null($dato->operador->firma)) ? asset('..'.$carpeta.'/storage/app/public/firma/firma.jpg') : asset('..'.$carpeta.'/storage/app/'.$dato->operador->firma) }}" class="firma" alt="Firma">
+                    <img src="{{ (is_null($dato->operador->firma)) ? storage_path('app/public/firma/firma.jpg') : storage_path('app/'.$dato->operador->firma) }}" class="firma" alt="Firma">
                 </td>
             </tr>
         </tbody>
