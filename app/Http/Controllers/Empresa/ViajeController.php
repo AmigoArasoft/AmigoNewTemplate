@@ -255,7 +255,7 @@ class ViajeController extends Controller{
     public function origin(Request $request){
         if(isset($request->id)){
             $dato = Viaje::findOrFail($request->id);
-            $carpeta = (substr(URL::current(), 0, 16) == 'http://localhost') ? '' : '/mina_app';
+            $carpeta = (substr(URL::current(), 0, 16) == 'http://localhost') ? '' : '';
             $pdf = PDF::loadView('mina.empresa.viaje.origen', compact('dato', 'carpeta'));
             return $pdf->stream('certificado_origen_'.$request->id.'.pdf');
         }
@@ -265,7 +265,7 @@ class ViajeController extends Controller{
     public function vale(Request $request){
         if(isset($request->id)){
             $dato = Viaje::findOrFail($request->id);
-            $carpeta = (substr(URL::current(), 0, 16) == 'http://localhost') ? '' : '/mina_app';
+            $carpeta = (substr(URL::current(), 0, 16) == 'http://localhost') ? '' : '';
             $pdf = PDF::loadView('mina.empresa.viaje.vale', compact('dato', 'carpeta'));
             return $pdf->stream('certificado_vale_'.$request->id.'.pdf');
         }

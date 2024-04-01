@@ -33,7 +33,7 @@ class MinaController extends Controller{
         try {
             $emails = explode(",", $request->emails);
             $dato = Viaje::findOrFail($request->id);
-            $carpeta = (substr(URL::current(), 0, 16) == 'http://localhost') ? '' : '/mina_app';
+            $carpeta = (substr(URL::current(), 0, 16) == 'http://localhost') ? '' : '';
             $lugarDocumento = $request->tipo_documento == "origen" ? 'public/pdf/certificado_origen.pdf' : 'public/pdf/vale.pdf';
             $pdf = $request->tipo_documento == "origen" ? PDF::loadView('mina.empresa.viaje.origen', compact('dato', 'carpeta')) : PDF::loadView('mina.empresa.viaje.vale', compact('dato', 'carpeta'));
             Storage::put($lugarDocumento, $pdf->output());

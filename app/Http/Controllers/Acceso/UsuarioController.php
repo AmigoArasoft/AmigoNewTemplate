@@ -24,6 +24,7 @@ class UsuarioController extends Controller{
         if (!$request->ajax()) return redirect('/');
         return datatables()
             ->eloquent(User::select('users.id', 'terceros.nombre as empresa', 'name', 'users.email', 'users.activo')
+            ->where('users.activo', '=', 1)
             ->join('terceros', 'users.tercero_id', '=', 'terceros.id')
             ->with(['roles' => function ($query) {
                 $query->select('name')->orderBy('id');
@@ -80,7 +81,7 @@ class UsuarioController extends Controller{
         $dato = User::findOrFail($id);
         $dato->activo = ($dato->activo == 1) ? 0 : 1;
         $dato->save();
-        return redirect()->route('usuario')->with('info', 'Registro inactivado con éxito');
+        return redirect()->route('usuario')->with('info', 'Registro eliminado con éxito');
     }
 
     protected function validator(array $data){

@@ -4,7 +4,7 @@
             <h3 class="card-title">{{ $accion }} usuario</h3>
         @else()
             @if ($dato->activo == 1)
-                <h3 class="card-title">Inactivar usuario</h3>
+                <h3 class="card-title">Eliminar usuario</h3>
             @else
                 <h3 class="card-title">Activar usuario</h3>
             @endif

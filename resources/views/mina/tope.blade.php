@@ -7,8 +7,30 @@
 @endsection
 
 @section('content')
-{!! Form::open(['route' => 'tope', 'name' => 'forma', 'target' => 'blank', 'method' => 'POST']) !!}
+{!! Form::open(['route' => 'tope', 'name' => 'forma', 'method' => 'POST']) !!}
     <div class="row justify-content-md-center">
+        <div class="col-xxl-3 col-lg-3 col-md-3">
+            <div class="card custom-card hrm-main-card danger">
+                <div class="card-body">
+                    <div class="d-flex align-items-top justify-content-between">
+                        <div>
+                            <span class="avatar avatar-md avatar-rounded bg-danger">
+                                <i class="ti ti-box fs-24"></i>
+                            </span>
+                        </div>
+                        <div class="flex-fill ms-2">
+                            
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                <div>
+                                    <p class="text-muted mb-0">Tope Actual</p>
+                                    <h4 class="fw-semibold mt-1">{{ number_format($tope->tope, 0, '', '.') }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             <div class="form-group row">
                 {{ Form::label('tope', 'Tope de Informe (Numérico):', ['class' => 'col-md-8']) }}

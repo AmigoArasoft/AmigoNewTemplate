@@ -74,8 +74,8 @@
             </td>
         </tr>
     </table>
-    <h5 style="position:absolute;top:10%;left:4%;">NIT. 900.349.029-7</h5>
-    <table id="table">
+    <h5 style="position:absolute;top:8%;left:3%;">NIT. 900.349.029-7</h5>
+    <table id="table" style="margin-top:30px;">
         <tbody>
             <tr class="centro">
                 <td colspan="1" class="borde-derecha">
@@ -102,7 +102,7 @@
                     <h4>M3</h4>
                 </td>
                 <td colspan="7" class="borde">
-                    {{ $dato->volumen }} M3
+                    {{ $dato->volumen }}
                 </td>
             </tr>
             <tr class="centro">

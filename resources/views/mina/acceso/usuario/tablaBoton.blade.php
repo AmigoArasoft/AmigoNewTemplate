@@ -4,7 +4,7 @@
 	@endcan
 	@can('Rol borrar')
 		@if($activo==1)
-			<a class="btn btn-sm btn-danger" href="{{ route('usuario.ver', $id) }}"><i class="fas fa-times-circle"></i> Inactivar</a>
+			<a class="btn btn-sm btn-danger" href="{{ route('usuario.ver', $id) }}"><i class="fas fa-times-circle"></i> Eliminar</a>
 		@else
 			<a class="btn btn-sm btn-info" href="{{ route('usuario.ver', $id) }}"><i class="fas fa-check-circle"></i> Activar</a>
 		@endif

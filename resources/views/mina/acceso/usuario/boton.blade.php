@@ -10,7 +10,7 @@
 	@can('Usuario borrar')
 		{!! Form::open(['route' => ['usuario.ver', $dato->id], 'method' => 'DELETE']) !!}
 			@if($dato->activo==1)
-				{{ Form::button('<i class="fas fa-times-circle"></i> Inactivar', ['type' => 'submit', 'class' => 'btn btn-danger float-left']) }}
+				{{ Form::button('<i class="fas fa-times-circle"></i> Eliminar', ['type' => 'submit', 'class' => 'btn btn-danger float-left']) }}
 			@else
 				{{ Form::button('<i class="fas fa-check-circle"></i> Activar', ['type' => 'submit', 'class' => 'btn btn-info float-left']) }}
 			@endif
