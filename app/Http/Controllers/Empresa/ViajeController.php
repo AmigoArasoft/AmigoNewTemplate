@@ -264,7 +264,11 @@ class ViajeController extends Controller{
 
     public function vale(Request $request){
         if(isset($request->id)){
-            $dato = Viaje::findOrFail($request->id);
+            $dato = Viaje::where('nro_viaje', $request->id)->first();
+
+            if(!$dato)
+                return redirect()->back()->with('error', 'No existe el vale');
+
             $carpeta = (substr(URL::current(), 0, 16) == 'http://localhost') ? '' : '';
             $pdf = PDF::loadView('mina.empresa.viaje.vale', compact('dato', 'carpeta'));
             return $pdf->stream('certificado_vale_'.$request->id.'.pdf');

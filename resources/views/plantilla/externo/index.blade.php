@@ -9,6 +9,7 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}"/>
     <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 </head>
 <body class="layout-sidebar-fixed sidebar-collapse">
     <div class="wrapper" id="app">
@@ -23,5 +24,15 @@
         </div>
         @include('plantilla.webPie')
     </div>
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/bs-custom-file-input.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+    @include('plantilla.mina.mensaje')
+    <livewire:scripts />
 </body>
 </html>
