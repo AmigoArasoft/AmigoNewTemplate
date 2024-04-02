@@ -237,7 +237,7 @@ class ViajeController extends Controller{
             'frente_id' => $operador->frente_id,
             'volumen' => $request->volumen,
             'valor' => $tarifa->tarifa,
-            'nro_viaje' => $request->nro_viaje ?? NULL,
+            'nro_viaje' => $request->nro_viaje,
             'cliente' => $request->cliente ?? NULL,
             'destino' => $request->destino ?? NULL
         ])->save();
@@ -354,6 +354,7 @@ class ViajeController extends Controller{
             'material_id' => 'required|exists:materias,id',
             'subgrupo_id' => 'required|exists:gruposubmats,id',
             'volumen' => 'required|numeric|min:0.01',
+            'nro_viaje' => 'required|numeric',
         ]);
     }
 }

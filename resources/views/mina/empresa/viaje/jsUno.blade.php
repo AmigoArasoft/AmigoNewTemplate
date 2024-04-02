@@ -146,6 +146,11 @@ function formSubmit(e){
         return false;
     }
 
+    if(document.forma.nro_viaje.value == ""){
+        toastr.error('Número de Vale no debe estar vacío')
+        return false;
+    }
+
 
     document.forma.volumen.disabled = false;
     $('#modalCargando').modal("show");
