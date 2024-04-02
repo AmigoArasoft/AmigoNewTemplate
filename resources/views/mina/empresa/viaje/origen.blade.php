@@ -174,6 +174,6 @@
             </tr>
         </tbody>
     </table>
-    <<p class="texto10">Para verificar la autenticidad del presente Certificado de Orígen por favor consulte: <a href="https://garzonromero.com/amigo/origen?id={{ $dato->id }}" href="blank">https://garzonromero.com/mina/origen?id={{ $dato->id }}</a></p>
+    <<p class="texto10">Para verificar la autenticidad del presente Certificado de Orígen por favor consulte: <a href="https://garzonromero.com/amigo/origen?id={{ $dato->id }}" href="blank">https://garzonromero.com/amigo/origen?id={{ $dato->id }}</a></p>
 </body>
 </html>
