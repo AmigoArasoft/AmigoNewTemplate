@@ -2,6 +2,7 @@
     function dataTable(){
         desde = $("#desdeForm").val();
         hasta = $("#hastaForm").val();
+        operador_id = $("#operador_id").val();
         
         // Destruir el DataTable existente si existe
         if ($.fn.DataTable.isDataTable('#tabla')) {
@@ -18,6 +19,7 @@
                 data: {
                     desde: desde,
                     hasta: hasta,
+                    operador_id: operador_id,
                     _token: '{{ csrf_token() }}',
                 }
             },

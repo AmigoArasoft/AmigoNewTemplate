@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Exports\FacturaExport;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
+use App\Models\Tercero;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -20,15 +21,21 @@ class InformeAutoridadesController extends Controller{
     }
 
     public function index(Request $request){
-        return view('mina.empresa.facturaAutoridades.index');
+        $operador = Tercero::where('operador', 1)->where('activo', 1)->orderBy('nombre')->get()->pluck('nombre', 'id');
+
+        return view('mina.empresa.facturaAutoridades.index', compact('operador'));
     }
 
     public function list(Request $request){
         $tope = Tope::first()->tope;
 
-        $facturas = Factura::select('id', 'volumen', 'fecha')
-        ->whereBetween('fecha', [$request->desde, $request->hasta])
-        ->get();
+        $facturas = Factura::select('id', 'volumen', 'fecha')->whereDate('desde', '>=', $request->desde)->whereDate('hasta', '<=', $request->hasta);
+        
+        if($request->has('operador_id') && !empty($request->operador_id)){
+            $facturas = $facturas->where('tercero_id', $request->operador_id);
+        }
+
+        $facturas = $facturas->get();
 
         $facturaArray = [];
         $suma = 0;
