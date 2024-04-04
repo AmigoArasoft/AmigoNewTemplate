@@ -24,4 +24,15 @@
                 @endif
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ Form::label('operador_id', 'Operador:') }}
+                {{ Form::select('operador_id', $operador, null, ['class' => $errors->first('operador_id') ? 'form-control form-control-sm is-invalid' : 'form-control form-control-sm selectpicker', 'data-live-search' => 'true', 'onchange' => 'dataTable()', 'title' => 'Seleccionar Operador']) }}
+                @if($errors->has('operador_id'))
+                    <div class="invalid-feedback d-block">
+                        {{ $errors->first('operador_id') }}
+                      </div>
+                @endif
+            </div>
+        </div>
     </div>
