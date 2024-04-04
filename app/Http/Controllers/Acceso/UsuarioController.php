@@ -80,6 +80,7 @@ class UsuarioController extends Controller{
     public function destroy($id){
         $dato = User::findOrFail($id);
         $dato->activo = ($dato->activo == 1) ? 0 : 1;
+        $dato->email = NULL;
         $dato->save();
         return redirect()->route('usuario')->with('info', 'Registro eliminado con éxito');
     }
