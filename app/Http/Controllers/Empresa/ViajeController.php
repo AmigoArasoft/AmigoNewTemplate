@@ -304,6 +304,16 @@ class ViajeController extends Controller{
         return redirect()->route('viaje')->with('info', 'Volumen del viaje Nro. '.$viaje->id .' ha sido actualizado correctamente');
     }
 
+    public function quitarCertificadoViaje($id){
+        $dato = Viaje::findOrFail($id);
+        $dato->fecha_certificacion = NULL;
+        $dato->numero_certificacion = NULL;
+        $dato->certificado = 0;
+        $dato->save();
+        return redirect()->route('viaje')->with('info', 'Certificado del viaje removido con éxito');
+    }
+
+
     public function getOperadores(){
         $operadores = Tercero::where('operador', 1)->whereNotNull('frente_id')->where('activo', 1)->orderBy('nombre')->get()->pluck('nombre', 'id');
 
