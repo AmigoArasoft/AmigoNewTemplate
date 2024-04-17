@@ -10,6 +10,6 @@ class Tope extends Model
     use HasFactory;
 
     protected $table = "tope";
-    protected $fillable = ['id', 'tope'];
+    protected $fillable = ['id', 'tope', 'operador_id', 'desde', 'hasta', 'trimestre'];
     public $timestamps = false;
 }

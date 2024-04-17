@@ -29,7 +29,6 @@ Route::prefix('amigo')->group(function () {
 	Route::get('origen', [ViajeController::class, 'origin'])->name('origen');
 	Route::match(['GET', 'POST'], 'vale', [ViajeController::class, 'vale'])->name('getVale');
 	Route::post('origen', [ViajeController::class, 'origin']);
-	Route::match(['GET', 'POST'], 'tope', [InformeAutoridadesController::class, 'tope'])->name('tope');
 	Route::prefix('factura')->group(function () {
 		Route::middleware(['permission:Factura leer|Factura crear|Factura editar|Factura borrar'])->group(function () {
 			Route::get('', [FacturaController::class, 'index'])->name('factura');
@@ -120,6 +119,14 @@ Route::prefix('amigo')->group(function () {
 		Route::post('getOperadorViajeCertificado', [ViajeController::class, 'getOperadorViajeCertificado'])->name('viaje.getOperadorViajeCertificado');
 		Route::get('getOperadores', [ViajeController::class, 'getOperadores'])->name('viaje.getOperadores');
 		Route::post('certificar', [ViajeController::class, 'certificar'])->name('viaje.certificar');
+	});
+	Route::prefix('tope')->group(function () {
+		Route::middleware(['permission:Topes'])->group(function () {
+			Route::match(['GET', 'POST'], '', [InformeAutoridadesController::class, 'tope'])->name('tope');
+			Route::get('listar', [InformeAutoridadesController::class, 'listTope'])->name('tope.listar');
+			Route::get('destroy/{id}', [InformeAutoridadesController::class, 'destroy'])->name('tope.destroy');
+			Route::post('store', [InformeAutoridadesController::class, 'store'])->name('tope.store');
+		});
 	});
 	Route::middleware(['guest'])->group(function () {
 		Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

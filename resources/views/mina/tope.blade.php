@@ -7,46 +7,51 @@
 @endsection
 
 @section('content')
-{!! Form::open(['route' => 'tope', 'name' => 'forma', 'method' => 'POST']) !!}
-    <div class="row justify-content-md-center">
-        <div class="col-xxl-3 col-lg-3 col-md-3">
-            <div class="card custom-card hrm-main-card danger">
-                <div class="card-body">
-                    <div class="d-flex align-items-top justify-content-between">
-                        <div>
-                            <span class="avatar avatar-md avatar-rounded bg-danger">
-                                <i class="ti ti-box fs-24"></i>
-                            </span>
-                        </div>
-                        <div class="flex-fill ms-2">
-                            
-                            <div class="d-flex align-items-center justify-content-between flex-wrap">
-                                <div>
-                                    <p class="text-muted mb-0">Tope Actual</p>
-                                    <h4 class="fw-semibold mt-1">{{ number_format($tope->tope, 0, '', '.') }}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="card card-info">
+        <div class="card-header">@yield('titulo')
+            @if(Auth::user()->tercero_id == 1)
+                <button type="button" class="btn btn-sm btn-light text-dark" onclick="getOperadores()" data-toggle="modal"  data-target="#modalCreateTope">
+                    <i class="fas fa-plus-circle"></i> Crear tope operador
+                </button>
+            @endif
         </div>
-        <div class="col-md-6">
-            <div class="form-group row">
-                {{ Form::label('tope', 'Tope de Informe (Numérico):', ['class' => 'col-md-8']) }}
-                <div class="col-md-4">
-                    {{ Form::number('tope', isset($tope) ? $tope : "", ['class' => $errors->first('tope') ? 'form-control form-control-sm is-invalid' : 'form-control form-control-sm', 'min' => 1, 'required', 'autofocus']) }}
-                </div>
-                @if($errors->has('tope'))
-                    <div class="invalid-feedback d-block">
-                        {{ $errors->first('tope') }}
-                    </div>
-                @endif
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tabla" class="table table-bordered table-striped table-hover table-sm">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Acción</th>
+                            <th>Operador</th>
+                            <th>(Q1-Q2-Q3-Q4)</th>
+                            <th>Desde</th>
+                            <th>Hasta</th>
+                            <th>Total M3</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-        </div>
-        <div class="col-md-2">
-            {{ Form::button('<i class="fas fa-search"></i> Guardar', ['type' => 'submit', 'class' => 'btn btn-sm btn-info']) }}
         </div>
     </div>
-{!! Form::close() !!}
+@endsection
+
+@include('mina.empresa.tope.modal')
+
+@section('scripts')
+
+    <!-- JSVECTOR MAPS JS -->
+    <script src="{{asset('build/assets/libs/jsvectormap/js/jsvectormap.min.js')}}"></script>
+    <script src="{{asset('build/assets/libs/jsvectormap/maps/world-merc.js')}}"></script>
+
+    <!-- APEX CHARTS JS -->
+    <script src="{{asset('build/assets/libs/apexcharts/apexcharts.min.js')}}"></script>
+
+    <!-- CHARTJS CHART JS -->
+    <script src="{{asset('build/assets/libs/chart.js/chart.min.js')}}"></script>
+
+    <!-- CRM-Dashboard -->
+    @vite('resources/assets/js/crm-dashboard.js')
+@endsection
+
+@section('codigo')
+    @include('mina.empresa/tope/js')
 @endsection

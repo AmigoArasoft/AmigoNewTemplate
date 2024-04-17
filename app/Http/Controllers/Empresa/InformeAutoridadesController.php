@@ -21,55 +21,41 @@ class InformeAutoridadesController extends Controller{
     }
 
     public function index(Request $request){
-        $operador = Tercero::where('operador', 1)->where('activo', 1)->orderBy('nombre')->get()->pluck('nombre', 'id');
+        $operador = Tercero::where('operador', 1)->whereNotNull('frente_id')->where('activo', 1)->orderBy('nombre')->get()->pluck('nombre', 'id');
 
         return view('mina.empresa.facturaAutoridades.index', compact('operador'));
     }
 
     public function list(Request $request){
-        $tope = Tope::first()->tope;
-
-        $facturas = Factura::select('id', 'volumen', 'fecha')->whereDate('desde', '>=', $request->desde)->whereDate('hasta', '<=', $request->hasta);
-        
-        if($request->has('operador_id') && !empty($request->operador_id)){
-            $facturas = $facturas->where('tercero_id', $request->operador_id);
-        }
-
-        $facturas = $facturas->get();
-
-        $facturaArray = [];
-        $suma = 0;
-        foreach($facturas as $fac){
-            if($fac->volumen > 0){
-                $facturaSuma = $fac->volumen + $suma;
-            }else{
-                $viajes = Viaje::where('factura_id', $fac->id)->get();
-                $facturaSuma = $viajes->sum('volumen') + $suma;
-            }
-
-            if($facturaSuma <= $tope){
-                array_push($facturaArray, $fac->id);
-                $suma = $facturaSuma;
-            }
-        }
-
+        if (!$request->ajax()) return redirect('/');
         return datatables()
-            ->eloquent(
-                Factura::select('facturas.id', 'terceros.nombre as operador', 'facturas.fecha_nombre as fecha', 'facturas.desde_nombre as desde', 
-                'facturas.hasta_nombre as hasta', 'facturas.valor', 'facturas.activo')
-                ->when(Auth::user()->tercero_id != 1, function($q){
-                    return $q->where('tercero_id', Auth::user()->tercero_id);
-                })
-                ->join('terceros', 'facturas.tercero_id', '=', 'terceros.id')
-                ->whereIn('facturas.id', $facturaArray)
-            )
-            ->addColumn('botones', 'mina/empresa/facturaAutoridades/tablaBoton')
-            ->addColumn('metros', function (Factura $factura) {
-                return $factura->viajes->sum('volumen');
-            })
-            ->addColumn('activo', 'mina/empresa/facturaAutoridades/tablaActivo')
-            ->rawColumns(['botones', 'activo'])
-            ->toJson();
+        ->eloquent(Viaje::select('viajes.nro_viaje', 'viajes.id', 'viajes.fecha_nombre as fecha', 'terceros.nombre as operador', 'vehiculos.placa', 'materias.nombre', 'viajes.volumen', 'users.name as digitador', 'viajes.activo', 'viajes.volumen_manual', 'viajes.certificado', 'viajes.fecha_certificacion', 'viajes.numero_certificacion')
+            ->where('eliminado', 0)
+            ->whereBetween('viajes.fecha', [$request->desde, $request->hasta])
+            ->whereIn('viajes.operador_id', $request->operador_id)
+            ->join('terceros', 'viajes.operador_id', '=', 'terceros.id')
+            ->join('vehiculos', 'viajes.vehiculo_id', '=', 'vehiculos.id')
+            ->join('materias', 'viajes.material_id', '=', 'materias.id')
+            ->join('users', 'viajes.user_update_id', '=', 'users.id')
+            ->orderBy('viajes.fecha', 'desc'))
+        ->addColumn('volumen', 'mina/empresa/viaje/tablaBotonVolumen')
+        ->addColumn('activo', 'mina/empresa/viaje/tablaActivo')
+        ->addColumn('certificado', 'mina/empresa/viaje/tablaCertificado')
+        ->rawColumns(['volumen', 'activo', 'certificado'])
+        ->toJson();
+    }
+
+    public function store(Request $request){
+
+        $dato = Tope::create([
+            'operador_id' => $request->operador_id,
+            'desde' => $request->desde,
+            'hasta' => $request->hasta,
+            'trimestre' => $request->trimestre,
+            'tope' => $request->tope
+        ]);
+
+        return redirect()->route('tope')->with('info', 'Tope creado con éxito');
     }
 
     public function tope(Request $request){
@@ -89,6 +75,29 @@ class InformeAutoridadesController extends Controller{
         }
 
         $tope = Tope::first();
+        $operador = Tercero::where('operador', 1)->whereNotNull('frente_id')->where('activo', 1)->orderBy('nombre')->get()->pluck('nombre', 'id');
         return view('mina.tope', compact('tope'));
+    }
+
+    public function listTope(Request $request){
+        return datatables()
+        ->eloquent(
+            Tope::select('tope.id', 'terceros.nombre as operador', 'tope.desde', 'tope.hasta', 'tope.trimestre', 'tope.tope')
+            ->join('terceros', 'tope.operador_id', '=', 'terceros.id')
+            ->when(!empty($request->get('desde')) && !empty($request->get('hasta')) && !empty($request->get('operador_id')), function ($q) use ($request) {
+                return $q->whereIn('terceros.id', $request->get('operador_id'))
+                ->where('tope.desde', $request->get('desde'))
+                ->where('hasta', $request->get('hasta'));
+            })
+        )
+        ->addColumn('botones', 'mina/empresa/tope/tablaBoton')
+        ->rawColumns(['botones'])
+        ->toJson();
+    }
+
+    public function destroy($id){
+        //Eliminamos la tope
+        Tope::findOrFail($id)->delete();
+        return redirect()->route('tope')->with('info', 'Tope eliminado con éxito');
     }
 }
