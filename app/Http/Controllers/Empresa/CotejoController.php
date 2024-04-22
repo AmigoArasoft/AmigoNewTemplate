@@ -93,7 +93,7 @@ class CotejoController extends Controller{
                 }else{
                     $errores[] = [
                         'viaje' => "Viaje ". $value['nro_vale'],
-                        'descripcion' => 'No existe en el informe AMIGO'
+                        'descripcion' => 'No existe en el informe de viajes activos de AMIGO'
                     ];
                 }
             }
