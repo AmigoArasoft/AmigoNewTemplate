@@ -34,6 +34,11 @@
             <a href="{{ route('tope') }}" class="side-menu__item">Topes</a>
         </li>
         @endcanany
+        @canany(['Cotejo'])
+        <li class="slide">
+            <a href="{{ route('cotejo') }}" class="side-menu__item">Cotejo</a>
+        </li>
+        @endcanany
     </ul>
 </li>
 @endcanany

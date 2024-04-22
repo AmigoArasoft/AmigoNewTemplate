@@ -20,6 +20,7 @@ use App\Http\Controllers\Administracion\ParametroController;
 use App\Http\Controllers\Acceso\UsuarioController;
 use App\Http\Controllers\Acceso\RolController;
 use App\Http\Controllers\Acceso\PermisoController;
+use App\Http\Controllers\Empresa\CotejoController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('/');
 Route::post('contacto', [WelcomeController::class, 'contacto'])->name('contacto');
@@ -126,6 +127,12 @@ Route::prefix('amigo')->group(function () {
 			Route::get('listar', [InformeAutoridadesController::class, 'listTope'])->name('tope.listar');
 			Route::get('destroy/{id}', [InformeAutoridadesController::class, 'destroy'])->name('tope.destroy');
 			Route::post('store', [InformeAutoridadesController::class, 'store'])->name('tope.store');
+		});
+	});
+	Route::prefix('cotejo')->group(function () {
+		Route::middleware(['permission:Cotejo'])->group(function () {
+			Route::match(['GET', 'POST'], '', [CotejoController::class, 'index'])->name('cotejo');
+			Route::post('excel', [CotejoController::class, 'excel'])->name('cotejo.excel');
 		});
 	});
 	Route::middleware(['guest'])->group(function () {

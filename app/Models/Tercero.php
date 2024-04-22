@@ -51,6 +51,10 @@ class Tercero extends Model{
         return $this->hasMany(Viaje::class, 'transporte_id');
     }
 
+    public function facturas(){
+        return $this->hasMany(Factura::class, 'tercero_id');
+    }
+
     public function contactos(){
         return $this->belongsToMany(Tercero::class, 'tercero_contacto', 'tercero_id', 'contacto_id');
     }
