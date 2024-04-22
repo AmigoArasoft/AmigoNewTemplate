@@ -50,8 +50,9 @@ class CotejoController extends Controller{
             $informe = Factura::where('id', $request->informe)->first();
             
             $errores = [];
+            $viajesAmigoExistentes = [];
 
-            foreach ($excel_arr[0] as $key => $value) {
+            foreach ($excel_arr[0] as $value) {
                 if (!array_key_exists('nro_vale', $value) || !array_key_exists('placa', $value) || !array_key_exists('cantidad_m3', $value) || !array_key_exists('material', $value)) {
                     return redirect()->route('cotejo')->with('error', "Estructura de archivo AMIGO no coincide, orden: NRO_VALE, PLACA, M3, MATERIAL");
                 }
@@ -73,29 +74,40 @@ class CotejoController extends Controller{
                     if($viaje->volumen != $value['cantidad_m3']){
                         $errores[] = [
                             'viaje' => "Viaje ". $value['nro_vale'],
-                            'descripcion' => 'VOLUMEN no coincide con el informe AMIGO'
+                            'descripcion' => "(VOLUMEN EXCEL: ". $value['cantidad_m3'] .") no coincide con el informe AMIGO (VOLUMEN AMIGO: $viaje->volumen)"
                         ];
                     }
 
                     if($viaje->vehiculo->placa != $value['placa']){
                         $errores[] = [
                             'viaje' => "Viaje ". $value['nro_vale'],
-                            'descripcion' => 'PATENTE no coincide con el informe AMIGO'
+                            'descripcion' => "(PATENTE EXCEL: ". $value['placa'] .") no coincide con el informe AMIGO (PATENTE AMIGO: ". $viaje->vehiculo->placa .")"
                         ];
                     }
 
                     if($viaje->material->nombre != $value['material']){
                         $errores[] = [
                             'viaje' => "Viaje ". $value['nro_vale'],
-                            'descripcion' => 'MATERIAL no coincide con el informe AMIGO'
+                            'descripcion' => "(MATERIAL EXCEL: ". $value['material'] .") no coincide con el informe AMIGO (MATERIAL AMIGO: ". $viaje->material->nombre .")"
                         ];
                     }
+
+                    $viajesAmigoExistentes[] = $viaje->id;
                 }else{
                     $errores[] = [
                         'viaje' => "Viaje ". $value['nro_vale'],
                         'descripcion' => 'No existe en el informe de viajes activos de AMIGO'
                     ];
                 }
+            }
+
+            $viajes = Viaje::where(['factura_id' => $informe->id])->whereNotIn('id', $viajesAmigoExistentes)->get();
+
+            foreach ($viajes as $value) {
+                $errores[] = [
+                    'viaje' => "Viaje ". $value['nro_viaje'],
+                    'descripcion' => 'Existe en AMIGO pero no en EXCEL'
+                ];
             }
 
             return Excel::download(new CotejoExport($errores, $request->informe), 'Cotejo_Informe_'.$request->informe.'.xlsx');
