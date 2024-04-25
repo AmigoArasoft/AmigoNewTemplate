@@ -12,7 +12,7 @@
 	<table style="border-collapse: collapse;">
 		<thead>
 			<tr>
-				<th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;"><b>VIAJE NRO VALE</b></th>
+				<th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;"><b>NRO VALE</b></th>
 				<th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;"><b>DESCRIPCIÓN</b></th>
 			</tr>
 		</thead>

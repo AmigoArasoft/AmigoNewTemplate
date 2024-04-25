@@ -66,28 +66,28 @@ class CotejoController extends Controller{
                 if($viaje){
                     if($viaje->operador_id != $informe->tercero_id){
                         $errores[] = [
-                            'viaje' => "Viaje ". $value['nro_vale'],
+                            'viaje' => "Vale ". $value['nro_vale'],
                             'descripcion' => 'OPERADOR no coincide con el seleccionado del informe AMIGO'
                         ];
                     }
 
                     if($viaje->volumen != $value['cantidad_m3']){
                         $errores[] = [
-                            'viaje' => "Viaje ". $value['nro_vale'],
+                            'viaje' => "Vale ". $value['nro_vale'],
                             'descripcion' => "(VOLUMEN EXCEL: ". $value['cantidad_m3'] .") no coincide con el informe AMIGO (VOLUMEN AMIGO: $viaje->volumen)"
                         ];
                     }
 
                     if($viaje->vehiculo->placa != $value['placa']){
                         $errores[] = [
-                            'viaje' => "Viaje ". $value['nro_vale'],
+                            'viaje' => "Vale ". $value['nro_vale'],
                             'descripcion' => "(PATENTE EXCEL: ". $value['placa'] .") no coincide con el informe AMIGO (PATENTE AMIGO: ". $viaje->vehiculo->placa .")"
                         ];
                     }
 
                     if($viaje->material->nombre != $value['material']){
                         $errores[] = [
-                            'viaje' => "Viaje ". $value['nro_vale'],
+                            'viaje' => "Vale ". $value['nro_vale'],
                             'descripcion' => "(MATERIAL EXCEL: ". $value['material'] .") no coincide con el informe AMIGO (MATERIAL AMIGO: ". $viaje->material->nombre .")"
                         ];
                     }
@@ -95,7 +95,7 @@ class CotejoController extends Controller{
                     $viajesAmigoExistentes[] = $viaje->id;
                 }else{
                     $errores[] = [
-                        'viaje' => "Viaje ". $value['nro_vale'],
+                        'viaje' => "Vale ". $value['nro_vale'],
                         'descripcion' => 'No existe en el informe de viajes activos de AMIGO'
                     ];
                 }
@@ -105,7 +105,7 @@ class CotejoController extends Controller{
 
             foreach ($viajes as $value) {
                 $errores[] = [
-                    'viaje' => "Viaje ". $value['nro_viaje'],
+                    'viaje' => "Vale ". $value['nro_viaje'],
                     'descripcion' => 'Existe en AMIGO pero no en EXCEL'
                 ];
             }
