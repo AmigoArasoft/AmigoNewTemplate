@@ -20,6 +20,11 @@
             <a href="{{ route('documento') }}" class="side-menu__item">Documento</a>
         </li>
         @endcanany
+        @canany(['Certificacion leer', 'Certificacion crear', 'Certificacion editar', 'Certificacion borrar'])
+        <li class="slide">
+            <a href="{{ route('certificacion') }}" class="side-menu__item">Certificaciones</a>
+        </li>
+        @endcanany
         @canany(['Empresa leer', 'Empresa crear', 'Empresa editar', 'Empresa borrar'])
         <li class="slide">
             <a href="{{ route('empresa') }}" class="side-menu__item">Empresa</a>

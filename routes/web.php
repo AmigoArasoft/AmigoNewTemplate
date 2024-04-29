@@ -1,26 +1,27 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\MinaController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Acceso\RolController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Empresa\CubicajeController;
-use App\Http\Controllers\Empresa\FacturaController;
 use App\Http\Controllers\Empresa\ViajeController;
-use App\Http\Controllers\Empresa\DocumentoController;
+use App\Http\Controllers\Acceso\PermisoController;
+use App\Http\Controllers\Acceso\UsuarioController;
+use App\Http\Controllers\Empresa\CotejoController;
 use App\Http\Controllers\Empresa\EmpresaController;
+use App\Http\Controllers\Empresa\FacturaController;
+use App\Http\Controllers\Empresa\CubicajeController;
 use App\Http\Controllers\Empresa\OperadorController;
-use App\Http\Controllers\Empresa\TransporteController;
 use App\Http\Controllers\Empresa\VehiculoController;
-use App\Http\Controllers\Empresa\InformeAutoridadesController;
-use App\Http\Controllers\Administracion\TerceroController;
+use App\Http\Controllers\Empresa\DocumentoController;
+use App\Http\Controllers\Empresa\TransporteController;
 use App\Http\Controllers\Administracion\TemaController;
 use App\Http\Controllers\Administracion\GrupoController;
+use App\Http\Controllers\Empresa\CertificacionController;
+use App\Http\Controllers\Administracion\TerceroController;
 use App\Http\Controllers\Administracion\ParametroController;
-use App\Http\Controllers\Acceso\UsuarioController;
-use App\Http\Controllers\Acceso\RolController;
-use App\Http\Controllers\Acceso\PermisoController;
-use App\Http\Controllers\Empresa\CotejoController;
+use App\Http\Controllers\Empresa\InformeAutoridadesController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('/');
 Route::post('contacto', [WelcomeController::class, 'contacto'])->name('contacto');
@@ -145,6 +146,24 @@ Route::prefix('amigo')->group(function () {
 		Route::get('clave', [MinaController::class, 'clave'])->name('clave');
 		Route::post('clave', [MinaController::class, 'cambio']);
 		Route::middleware(['mina'])->group(function () {
+			Route::prefix('certificacion')->group(function () {
+				Route::middleware(['permission:Certificacion leer|Certificacion crear|Certificacion editar|Certificacion borrar'])->group(function () {
+					Route::get('', [CertificacionController::class, 'index'])->name('certificacion');
+					Route::get('listar', [CertificacionController::class, 'list'])->name('certificacion.listar');
+					Route::get('storage/download/{archivo}', [CertificacionController::class, 'descargar'])->name('storage.certificacion.download');
+				});
+				Route::middleware(['permission:Certificacion crear'])->group(function () {
+					Route::get('crear', [CertificacionController::class, 'create'])->name('certificacion.crear');
+					Route::post('crear', [CertificacionController::class, 'store']);
+				});
+				Route::middleware(['permission:Certificacion editar'])->group(function () {
+					Route::get('editar/{id}', [CertificacionController::class, 'edit'])->name('certificacion.editar');
+					Route::put('editar/{id}', [CertificacionController::class, 'update']);
+				});
+				Route::middleware(['permission:Certificacion borrar'])->group(function () {
+					Route::get('activar/{id}', [CertificacionController::class, 'destroy'])->name('certificacion.activar');
+				});
+			});
 			Route::prefix('documento')->group(function () {
 				Route::middleware(['permission:Documento leer|Documento crear|Documento editar|Documento borrar'])->group(function () {
 					Route::get('', [DocumentoController::class, 'index'])->name('documento');
