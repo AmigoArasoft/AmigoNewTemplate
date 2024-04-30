@@ -38,7 +38,7 @@ class InformeAutoridadesController extends Controller{
             ->join('materias', 'viajes.material_id', '=', 'materias.id')
             ->join('users', 'viajes.user_update_id', '=', 'users.id')
             ->orderBy('viajes.fecha', 'desc'))
-        ->addColumn('volumen', 'mina/empresa/viaje/tablaBotonVolumen')
+        ->addColumn('volumen', 'mina/empresa/facturaAutoridades/tablaBotonVolumen')
         ->addColumn('activo', 'mina/empresa/viaje/tablaActivo')
         ->addColumn('certificado', 'mina/empresa/viaje/tablaCertificado')
         ->rawColumns(['volumen', 'activo', 'certificado'])
