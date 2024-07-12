@@ -15,11 +15,6 @@
         <li class="slide side-menu__label1">
             <a href="javascript:void(0);">Empresa</a>
         </li>
-        @canany(['Documento leer', 'Documento crear', 'Documento editar', 'Documento borrar'])
-        <li class="slide">
-            <a href="{{ route('documento') }}" class="side-menu__item">Documento</a>
-        </li>
-        @endcanany
         @canany(['Certificacion leer', 'Certificacion crear', 'Certificacion editar', 'Certificacion borrar'])
         <li class="slide">
             <a href="{{ route('certificacion') }}" class="side-menu__item">Certificaciones</a>

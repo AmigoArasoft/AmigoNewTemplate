@@ -164,24 +164,6 @@ Route::prefix('amigo')->group(function () {
 					Route::get('activar/{id}', [CertificacionController::class, 'destroy'])->name('certificacion.activar');
 				});
 			});
-			Route::prefix('documento')->group(function () {
-				Route::middleware(['permission:Documento leer|Documento crear|Documento editar|Documento borrar'])->group(function () {
-					Route::get('', [DocumentoController::class, 'index'])->name('documento');
-					Route::get('listar', [DocumentoController::class, 'list'])->name('documento.listar');
-					Route::get('storage/download/{archivo}', [DocumentoController::class, 'descargar'])->name('storage.download');
-				});
-				Route::middleware(['permission:Documento crear'])->group(function () {
-					Route::get('crear', [DocumentoController::class, 'create'])->name('documento.crear');
-					Route::post('crear', [DocumentoController::class, 'store']);
-				});
-				Route::middleware(['permission:Documento editar'])->group(function () {
-					Route::get('editar/{id}', [DocumentoController::class, 'edit'])->name('documento.editar');
-					Route::put('editar/{id}', [DocumentoController::class, 'update']);
-				});
-				Route::middleware(['permission:Documento borrar'])->group(function () {
-					Route::get('activar/{id}', [DocumentoController::class, 'destroy'])->name('documento.activar');
-				});
-			});
 			Route::prefix('empresa')->group(function () {
 				Route::middleware(['permission:Empresa leer|Empresa crear|Empresa editar|Empresa borrar'])->group(function () {
 					Route::get('', [EmpresaController::class, 'index'])->name('empresa');
