@@ -24,9 +24,14 @@ use App\Models\TerceroTarifa;
 use Illuminate\Support\Facades\Validator;
 
 class ViajeController extends Controller{
+    public $diaActual;
+    public $diaMesAnterior;
+
     public function __construct(){
         $this->middleware(['permission:Viaje leer|Viaje crear|Viaje editar|Viaje borrar'])->except('origin');
         $this->middleware('mina')->except('index', 'list', 'listInvoice', 'origin');
+        $this->diaActual = Carbon::now()->format('Y-m-d');
+        $this->diaMesAnterior = Carbon::now()->subMonth()->format('Y-m-d');
     }
 
     public function index(Request $request){
@@ -146,6 +151,17 @@ class ViajeController extends Controller{
         if(!$tarifa){
             return redirect()->back()->with('error', 'Operador debe tener tarifa asociado a los materiales');
         }
+        
+        if(isset($request->nro_viaje)){
+            $valeExistente = Viaje::where(['nro_viaje' => $request->nro_viaje, 'activo' => 1])
+            ->where('vehiculo_id', $request->vehiculo_id)
+            ->whereBetween('fecha', [$this->diaMesAnterior, $this->diaActual])
+            ->count();
+
+            if($valeExistente > 0){
+                return redirect()->back()->with('error', 'Vale existente en otro viaje con la misma volqueta con fecha menor a un mes');
+            }
+        }
 
         Viaje::create([
             'fecha' => $request->fecha,
@@ -208,6 +224,18 @@ class ViajeController extends Controller{
 
         if(!$tarifa){
             return redirect()->back()->with('error', 'Operador debe tener tarifa asociado a los materiales');
+        }
+
+        if(isset($request->nro_viaje)){
+            $valeExistente = Viaje::where(['nro_viaje' => $request->nro_viaje, 'activo' => 1])
+            ->andWhere('id', '<>', $id)
+            ->where('vehiculo_id', $request->vehiculo_id)
+            ->whereBetween('fecha', [$this->diaMesAnterior, $this->diaActual])
+            ->count();
+
+            if($valeExistente > 0){
+                return redirect()->back()->with('error', 'Vale existente en otro viaje con la misma volqueta con fecha menor a un mes');
+            }
         }
 
         $dato->fill([
