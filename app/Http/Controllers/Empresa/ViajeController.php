@@ -158,7 +158,7 @@ class ViajeController extends Controller{
             ->count();
 
             if($valeExistente > 0){
-                return redirect()->back()->with('error', 'Vale existente en otro viaje con la misma volqueta con fecha menor a un mes');
+                return redirect()->back()->with('error', 'Vale existente en otro viaje con fecha menor a un mes');
             }
         }
 
@@ -232,7 +232,7 @@ class ViajeController extends Controller{
             ->count();
 
             if($valeExistente > 0){
-                return redirect()->back()->with('error', 'Vale existente en otro viaje con la misma volqueta con fecha menor a un mes');
+                return redirect()->back()->with('error', 'Vale existente en otro viaje con fecha menor a un mes');
             }
         }
 
