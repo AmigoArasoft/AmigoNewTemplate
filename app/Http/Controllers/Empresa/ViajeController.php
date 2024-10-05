@@ -147,14 +147,6 @@ class ViajeController extends Controller{
             return redirect()->back()->with('error', 'Operador debe tener tarifa asociado a los materiales');
         }
 
-        if(isset($request->nro_viaje)){
-            $valeExistente = Viaje::where(['nro_viaje' => $request->nro_viaje, 'activo' => 1])->count();
-
-            if($valeExistente > 0){
-                return redirect()->back()->with('error', 'Vale existente en otro viaje');
-            }
-        }
-
         Viaje::create([
             'fecha' => $request->fecha,
             'vehiculo_id' => $request->vehiculo_id,
@@ -216,14 +208,6 @@ class ViajeController extends Controller{
 
         if(!$tarifa){
             return redirect()->back()->with('error', 'Operador debe tener tarifa asociado a los materiales');
-        }
-
-        if(isset($request->nro_viaje)){
-            $valeExistente = Viaje::where(['nro_viaje' => $request->nro_viaje, 'activo' => 1])->where('id', '<>', $dato->id)->count();
-
-            if($valeExistente > 0){
-                return redirect()->back()->with('error', 'Vale existente en otro viaje');
-            }
         }
 
         $dato->fill([
