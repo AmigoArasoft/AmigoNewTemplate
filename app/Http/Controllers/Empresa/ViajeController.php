@@ -227,7 +227,7 @@ class ViajeController extends Controller{
 
         if(isset($request->nro_viaje)){
             $valeExistente = Viaje::where(['nro_viaje' => $request->nro_viaje, 'activo' => 1])
-            ->andWhere('id', '<>', $id)
+            ->where('id', '<>', $id)
             ->whereBetween('fecha', [$this->diaMesAnterior, $this->diaActual])
             ->count();
 
