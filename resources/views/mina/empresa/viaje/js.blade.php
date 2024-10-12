@@ -17,6 +17,7 @@ $(document).ready(function() {
             {data: 'operador', name: 'terceros.nombre'},
             {data: 'placa', name: 'vehiculos.placa'},
             {data: 'nombre', name: 'materias.nombre'},
+            {data: 'cliente', name: 'viajes.cliente'},
             {data: 'volumen', className:'text-right'},
             {
                 data: 'volumen_manual',

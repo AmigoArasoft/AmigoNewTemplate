@@ -123,6 +123,7 @@
 	            <th>ID Viaje</th>
 	            <th>Nro Vale</th>
 	            <th>Material</th>
+	            <th>Cliente</th>
 	            <th>Volumen</th>
 	        </tr>
 	    </thead>
@@ -134,6 +135,7 @@
 	    			<td>{{ $e->id }}</td>
 	    			<td>{{ $e->nro_viaje ?? "" }}</td>
 	    			<td>{{ $e->nombre }}</td>
+	    			<td>{{ $e->cliente }}</td>
 	    			<td>{{ $e->volumen }}</td>
 	    		</tr>
 	    	@endforeach

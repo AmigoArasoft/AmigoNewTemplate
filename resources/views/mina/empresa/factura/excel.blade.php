@@ -86,9 +86,10 @@
 	        <tr>
 	            <th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;">Fecha</th>
 	            <th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;">Placa</th>
-	            <th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;">Id Viaje</th>
+	            <th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;">ID Viaje</th>
 	            <th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;">Nro Vale</th>
 	            <th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;">Material</th>
+	            <th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;">Cliente</th>
 	            <th style="border: 2px solid #000;text-align:center;font-weight:bold;font-size:14px !important;">Volumen</th>
 	        </tr>
 	    </thead>
@@ -100,6 +101,7 @@
 	    			<td style="border: 1px solid #000;font-size:12px !important;">{{ $e->id }}</td>
 	    			<td style="border: 1px solid #000;font-size:12px !important;">{{ $e->nro_viaje ?? "" }}</td>
 	    			<td style="border: 1px solid #000;font-size:12px !important;">{{ $e->nombre }}</td>
+	    			<td style="border: 1px solid #000;font-size:12px !important;">{{ $e->cliente }}</td>
 	    			<td style="border: 1px solid #000;font-size:12px !important;">{{ $e->volumen }}</td>
 	    		</tr>
 	    	@endforeach

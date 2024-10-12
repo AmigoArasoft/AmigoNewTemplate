@@ -126,6 +126,7 @@
 			            <th>Operador</th>
 			            <th>Vehículo</th>
 			            <th>Material</th>
+			            <th>Cliente</th>
 			            <th>Volúmen</th>
 			            <th>Volúmen cambiado</th>
 			            <th>Digitador</th>

@@ -6,20 +6,16 @@ use PDF;
 use URL;
 
 use Carbon\Carbon;
-use App\Models\Grupo;
 use App\Models\Viaje;
 use App\Models\Materia;
 use App\Models\Tercero;
-use App\Models\Material;
 use App\Models\Vehiculo;
 use App\Models\Gruposubmat;
-use CreateGruposubmatsTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cubicaje;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GrupoSubMateriaMaterial;
-use App\Models\Tarifa;
 use App\Models\TerceroTarifa;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,7 +42,9 @@ class ViajeController extends Controller{
     public function list(Request $request){
         if (!$request->ajax()) return redirect('/');
         return datatables()
-            ->eloquent(Viaje::select('viajes.nro_viaje', 'viajes.id', 'viajes.fecha_nombre as fecha', 'terceros.nombre as operador', 'vehiculos.placa', 'materias.nombre', 'viajes.volumen', 'users.name as digitador', 'viajes.activo', 'viajes.volumen_manual', 'viajes.certificado', 'viajes.fecha_certificacion', 'viajes.numero_certificacion')
+            ->eloquent(Viaje::select('viajes.nro_viaje', 'viajes.id', 'viajes.fecha_nombre as fecha', 'terceros.nombre as operador', 'vehiculos.placa', 'materias.nombre', 
+            'viajes.volumen', 'users.name as digitador', 'viajes.activo', 'viajes.volumen_manual', 'viajes.certificado', 'viajes.fecha_certificacion', 'viajes.numero_certificacion', 
+            'viajes.cliente')
                 ->where('eliminado', 0)
                 ->when(Auth::user()->tercero_id != 1, function($q){
                     return $q->where('operador_id', Auth::user()->tercero_id);
@@ -67,7 +65,7 @@ class ViajeController extends Controller{
         if (!$request->ajax()) return redirect('/');
         $operadorUno = Tercero::where('id', $id)->first();
         return datatables()
-            ->eloquent(Viaje::select('viajes.id', 'viajes.fecha_nombre as fecha', 'terceros.nombre as operador', 'vehiculos.placa', 'materias.nombre', 'viajes.volumen', 'viajes.valor', 'viajes.total', 'viajes.nro_viaje')
+            ->eloquent(Viaje::select('viajes.id', 'viajes.fecha_nombre as fecha', 'terceros.nombre as operador', 'vehiculos.placa', 'materias.nombre', 'viajes.cliente', 'viajes.volumen', 'viajes.valor', 'viajes.total', 'viajes.nro_viaje')
                 ->when($operadorUno->operador == 1, function($q) use ($id) {
                     return $q->where('operador_id', $id);
                 })
@@ -87,7 +85,7 @@ class ViajeController extends Controller{
     public function listInvoice(Request $request, $id){
         if (!$request->ajax()) return redirect('/');
         return datatables()
-            ->eloquent(Viaje::select('viajes.id', 'viajes.fecha_nombre as fecha', 'terceros.nombre as operador', 'vehiculos.placa', 'materias.nombre', 'viajes.volumen', 'viajes.valor', 'viajes.total', 'viajes.nro_viaje')
+            ->eloquent(Viaje::select('viajes.id', 'viajes.fecha_nombre as fecha', 'terceros.nombre as operador', 'vehiculos.placa', 'materias.nombre', 'viajes.cliente', 'viajes.volumen', 'viajes.valor', 'viajes.total', 'viajes.nro_viaje')
                 ->where('factura_id', $id)
                 ->join('terceros', 'viajes.operador_id', '=', 'terceros.id')
                 ->join('vehiculos', 'viajes.vehiculo_id', '=', 'vehiculos.id')

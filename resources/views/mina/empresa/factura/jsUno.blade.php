@@ -14,6 +14,7 @@ $(document).ready(function() {
             {data: 'operador', name: 'terceros.nombre'},
             {data: 'placa', name: 'vehiculos.placa'},
             {data: 'nombre', name: 'materias.nombre'},
+            {data: 'cliente', name: 'viajes.cliente'},
             {data: 'volumen', name: 'viajes.volumen', className:'text-right', render: $.fn.dataTable.render.number('.', ',', 2, '')},
             {data: 'nro_viaje', name: 'viajes.nro_viaje', className:'text-right'},
             @if (Auth::user()->role->role_id == 1 || Auth::user()->role->role_id == 3)

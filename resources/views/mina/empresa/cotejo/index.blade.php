@@ -39,6 +39,16 @@
                                 </div>
                             @endif
                         </div>
+                        <div class="col-sm-4">
+                            <label>
+                                Ejemplo estructura
+                            </label>
+                            <br>
+                            <a class="btn btn-success btn-rounded" href="{{ asset('assets/ESTRUCTURA COTEJO.xlsx') }}">
+                                <i class="fas fa-file-excel"></i>
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
                     </div>
             </div>
             <div class="card-footer">

@@ -40,6 +40,7 @@
                         <th>Operador</th>
                         <th>Vehículo</th>
                         <th>Material</th>
+                        <th>Cliente</th>
                         <th>Volúmen</th>
                         <th>Nro Vale</th>
                         @if (Auth::user()->role->role_id == 1 || Auth::user()->role->role_id == 3)

@@ -215,7 +215,7 @@ class FacturaController extends Controller{
         ini_set('memory_limit', -1);
 
         $factura = Factura::find($id);
-        $viajes = Viaje::select('viajes.fecha', 'vehiculos.placa', 'viajes.id', 'viajes.nro_viaje', 'materias.nombre', 'viajes.volumen')
+        $viajes = Viaje::select('viajes.fecha', 'vehiculos.placa', 'viajes.id', 'viajes.nro_viaje', 'materias.nombre', 'viajes.cliente', 'viajes.volumen')
             ->join('vehiculos', 'viajes.vehiculo_id', '=', 'vehiculos.id')
             ->join('materias', 'viajes.material_id', '=', 'materias.id')
             ->join('gruposubmats', 'viajes.subgrupo_id', '=', 'gruposubmats.id')
