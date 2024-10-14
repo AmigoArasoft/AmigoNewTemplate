@@ -29,3 +29,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
 </IfModule>
 # End EnforceSSL
 
+<FilesMatch "^\.env">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
