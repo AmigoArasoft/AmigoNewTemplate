@@ -45,8 +45,7 @@ class MinaController extends Controller{
             Mail::to($emails)->send($mail);
             return redirect()->route('viaje')->with('info', $request->tipo_documento == "origen" ? 'Certificado de origen enviado correctamente' : 'Vale enviado correctamente');
         } catch (\Throwable $th) {
-            dd($th->getMessage());
-            return redirect()->route('viaje')->with('error', 'Error al enviar el correo electrónico'.$th->getMessage());
+            return redirect()->route('viaje')->with('error', 'Error, Servidor de Google no repondió al enviar correo, reintente');
         }
     }
 
