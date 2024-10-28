@@ -16,10 +16,11 @@
             $('#tablaTopes').DataTable().destroy();
         }
         $('#tabla').DataTable({
+            "dom": "Btp",
             "aaSorting": [[ 1, "desc" ]],
             "pageLength": 50,
             "autoWidth": false,
-            "serverSide": true,
+            "serverSide": false,
             "ajax":  {
                 url: `{{ route('facturaAutoridades.listar') }}`,
                 type: 'GET',
@@ -49,8 +50,22 @@
                 {data: 'certificado', class: 'text-center', orderable: false},
             ],
             "language": {
-                   "url": "{{ asset('js/Spanish.lang') }}"
-               }
+                "url": "{{ asset('js/Spanish.lang') }}"
+            },
+            buttons: [
+                {   
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn btn-sm btn-success',
+                    extend: 'excelHtml5',
+                    title: 'Informes_Amigo',
+                    exportOptions:{
+                        columns: ':visible',
+                        modifier: {
+                            page: 'all'
+                        }
+                    }
+                }
+            ]
         });
         $('#tablaTopes').DataTable({
             "dom": "t",
